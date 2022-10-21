@@ -142,9 +142,6 @@ Decryption result: 41666328770716fromId10001toId10002amount10.0MIGfMA0GCSqGSIb3D
 Compare: true
 
 
-curl -w "@curl-format.txt" -o NUL -s "http://wordpress.com/"
-
-
 
 # 10001 转钱到 10002 正确
 {
@@ -204,3 +201,19 @@ curl -w "@curl-format.txt" -o NUL -s "http://wordpress.com/"
 
 # invalid user pretend to be 10001
 http://localhost:9080/data/asset/get-balance?account=10001&id=4&key=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCSwX%2B1j46WZOlH0x1MzLRXaNfpiiWzz6xoq3HGXMSfBuLLHX3v5iJrKJ%2B%2Bebl6bjJ%2BcRZySJQc0qSV3CHH0OyqHrJVcQDhbRJwnLHf2rLZj6DokV0oGlOr9ndVLwvhBFlZ3vrJOCcetpupYd2a4CnrZFXQauVJFvSUf4go401tEwIDAQAB&signature=Sed%2FVMzx6nmacXhYqFY4FDHFzeD7HY2TdP1axejamOnXrLxd1RhnBWZkxHTj95h3WAs5r8AdsY11NYbS6r7AnhZLEvuuFG0ceJJfRAgYxPOMt9sNynO5wRvbPGT1olp1R6uS8uqPilLoGfikYJH%2BkFa6xlDQQscWsF9rNxvTldQkmJhjK%2BicbpDvwGMA6DNG4i5ZY%2F0SUBUMkBx4L%2BIQkiE5XOEWJ0WfZxceB6Ssvv8AKiJvpbWLNdTCPoU9hTDKf8rRbQyJQiLeGY6daiHuqgCa2Jz0r%2FST6I0utCfRi5Pl0Sc0aIdJNOaNbpe0GiaiUmTEF%2FpLkQUNGEoHCkG7XnSQ6nm2A3z4za5KVmKo8hXIR6aYQBIuinZTQCKyyu7wIjJkvZEqPOBuKm8ePUvGZjzQqIt8%2FVTk5%2BUwk0NAczqCkeoOjoHxDJSj1uyQcXLad3O%2BjE3y1%2BwQC11dOGzInsjNTJAFNKJYaqPySECnwIlwqFi9BOUK9YaPdMWpU6a%2F&timestamp=1666328770716
+
+
+
+curl -X 'PUT'   'http://localhost:9080/data/asset/send'   -H 'accept: */*'   -H 'Content-Type: application/json'   -d '{                                            
+  "id": 6,
+  "timestamp": "1666329872859",
+  "fromId": "10001",
+  "toId": "10002",
+  "amount": 600.0,
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCE6Hc+T4/IqAgiqaE0Tvlbbo2LP6vMVRT5lnHeZwCyDfSU1PMcFGFhcCPQ2Jsz21iKCSO4eMWX4NkQi2IxJEUt9PTue++Vin+VjmVjFmHa1fCxgC44bLEJkzwcsbPcfrbPqOvvjWCQ0eDmPXpowZsNcdk+jjM6h+bB/ogaD3FcowIDAQAB",
+  "signature": "QPJ3r93rAhdULvs4EGyzsvnFj3FB63v16d6g8z56SdYyr+l73mCmZ2++/ZL6ls8aabAKgvf8l2iCakuZQ+DZMB5R7HX0i+CsU301ephPQr62qJeYXz0ZUygqoKX2saiN/zPRyy9vBqp36f/Y5taEplcZty4ffr31HbaVBjMpNTYMY3v4qqbSA1GpF6UxT4RfJXg5NxKNP+07j9ODYv0K1nD1YoGMa47JTVMvTlvqTQmxP5+uFYtJeHfIOKg3DxSfv1D+o93b62I34FJ6giazmskjfrmOaiD5YhoHXLk0SyhPQWAKFDKwBzVDSDFdvazzSnTZgCo701jQ0wfN7IeA9mVEMCkv8O0dV7Jks8Tzu4Vm2RZCl57pb8+3Xe1wrDMAxN40vEUfTc1/lHJl+L9qRLbLcnGOibVQ+WFOs3MSI0ZJKsEaJrQAGtfiZ+1tj/PEB3bQ6S+94fb6r5xclydYZYc3CPMfvbL30LpWr83oYM14jhi3drtoJf4kK7j9eouo"
+}' -w "@curl-format.txt" -o SEND
+
+curl -X 'GET' \
+  'http://localhost:9080/data/asset/get-balance?account=10001&id=1&key=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCE6Hc%2BT4%2FIqAgiqaE0Tvlbbo2LP6vMVRT5lnHeZwCyDfSU1PMcFGFhcCPQ2Jsz21iKCSO4eMWX4NkQi2IxJEUt9PTue%2B%2BVin%2BVjmVjFmHa1fCxgC44bLEJkzwcsbPcfrbPqOvvjWCQ0eDmPXpowZsNcdk%2BjjM6h%2BbB%2FogaD3FcowIDAQAB&signature=LqM0p6xGm1GEk%2B%2B%2BP1hASLfLcEP7JcjL0BMdIZrSAptHzyIq822AW30%2BIh85MzusTTLT%2BC4F%2BCe7NDUPbv1Xrk3lVfWveufuKEXyQtoioD%2FgooKFMVe01YC6LO3Cos3%2BlqZoSaYJlXR2QDuWNoxrdD3tHpamEubNB5KmuAkGZgZ498RXfkGoFFSES6KgxqgTZd9K7criXUajs1S5ldxHg60DytT9jRo40q%2FM%2BOQos5i9HvbMsqRP2uxOINuL4pgyJ8ExX1E%2FXHNFunDnes8p3IBDD77S%2BwUzJILR0JECL4cYOxCMvLK4XgylLDNwk1diOWVCrV0YgY%2FwbHO42WzE9RZWeLynCTekTfounWCJ2Dsxf6LeN%2F9ineSNXYnjZHb7SJQA7zKObwXhhZutYlx5NNnW7GC8bhCOc7aY%2FLFApyttSZMo7%2FucpDCOP5vLyfH3PIqLKdTiLaA76z2Jr9xYw24cQeh0UsdjPkWpED7A%2BU7OSL1N08Z3zRTpS5iRElD2&timestamp=1666326043254' \
+  -H 'accept: application/json' -w "@curl-format.txt" -o GETBALANCE
