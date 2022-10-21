@@ -3,6 +3,8 @@
 ------+------+---------------------------+---------------------------+---------------------------
      0      2   22-10-19 21:27:01:730 CST   22-10-19 21:27:02:031 CST java.lang.IllegalArgumentException com.ibm.ws.http.channel.internal.HttpResponseMessageImpl.isGoodCharacters(String) 1
                                                                             - /Volumes/eaglelab/blc/HyperledgerFab_Java_Example/rest-api/target/liberty/wlp/usr/servers/rest-api/logs/ffdc/ffdc_22.10.19_21.27.01.0.log
-     1      1   22-10-20 13:03:03:514 CST   22-10-20 13:03:03:514 CST java.lang.NoClassDefFoundError com.ibm.ws.injectionengine.InjectionProcessorManager.getAllDeclaredFields 249
+     1      4   22-10-20 13:03:03:514 CST   22-10-20 13:03:35:712 CST java.lang.NoClassDefFoundError com.ibm.ws.injectionengine.InjectionProcessorManager.getAllDeclaredFields 249
                                                                             - /Volumes/eaglelab/blc/HyperledgerFab_Java_Example/rest-api/target/liberty/wlp/usr/servers/rest-api/logs/ffdc/ffdc_22.10.20_13.03.03.0.log
+     2      4   22-10-20 13:03:03:537 CST   22-10-20 13:03:35:713 CST java.lang.NoClassDefFoundError com.ibm.wsspi.injectionengine.MethodMap.getAllDeclaredMethods 106
+                                                                            - /Volumes/eaglelab/blc/HyperledgerFab_Java_Example/rest-api/target/liberty/wlp/usr/servers/rest-api/logs/ffdc/ffdc_22.10.20_13.03.03.1.log
 ------+------+---------------------------+---------------------------+---------------------------

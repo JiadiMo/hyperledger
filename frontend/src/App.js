@@ -40,7 +40,7 @@ function App() {
     },
   };
   const callApi = (from, to, amount) => {
-    axios.post(`http://localhost:8090/send`, {
+    axios.post(`http://localhost:9080/data/asset/send`, {
       ...requestBody,
       signature: encrypt(JSON.stringify(requestBody)),
     })

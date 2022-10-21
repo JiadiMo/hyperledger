@@ -16,26 +16,18 @@ public class Asset {
     private final static Genson genson = new Genson();
 
     @Property()
-    private String userID;
-
-    @Property()
     private double balance;
 
     @Property()
     private String publicKey;
 
-    public Asset(final String userID, double balance, String publicKey) {
-        this.userID = userID;
+    public Asset(double balance, String publicKey) {
         this.balance = balance;
         this.publicKey = publicKey;
     }
 
     public Asset() {
-        
-    }
 
-    public String getUserID() {
-        return userID;
     }
 
     public double getBalance() {
@@ -64,34 +56,13 @@ public class Asset {
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        Asset other = (Asset) obj;
-
-        return Objects.deepEquals(
-                new String[] {getUserID(), getPublicKey()},
-                new String[] {other.getUserID(), other.getPublicKey()})
-                &&
-                Objects.deepEquals(
-                        new double[] {getBalance()},
-                        new double[] {other.getBalance()});
-    }
-
-    @Override
     public int hashCode() {
-        return Objects.hash(getUserID(), getBalance(), getPublicKey());
+        return Objects.hash(getBalance(), getPublicKey());
     }
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "@" + Integer.toHexString(hashCode()) + " [userID=" + userID
-                + ", balance=" + balance + ", publicKey=" + publicKey + "]";
+        return this.getClass().getSimpleName() + "@" + Integer.toHexString(hashCode()) + " [balance=" + balance
+                + ", publicKey=" + publicKey + "]";
     }
 }

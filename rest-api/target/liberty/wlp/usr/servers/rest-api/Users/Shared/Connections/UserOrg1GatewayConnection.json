@@ -1,7 +1,7 @@
 {
     "certificateAuthorities": {
-        "org1ca-api.127-0-0-1.nip.io:8081": {
-            "url": "http://org1ca-api.127-0-0-1.nip.io:8081"
+        "org1ca-api.127-0-0-1.nip.io:8087": {
+            "url": "http://org1ca-api.127-0-0-1.nip.io:8087"
         }
     },
     "client": {
@@ -21,21 +21,21 @@
     "organizations": {
         "Org1": {
             "certificateAuthorities": [
-                "org1ca-api.127-0-0-1.nip.io:8081"
+                "org1ca-api.127-0-0-1.nip.io:8087"
             ],
             "mspid": "Org1MSP",
             "peers": [
-                "org1peer-api.127-0-0-1.nip.io:8081"
+                "org1peer-api.127-0-0-1.nip.io:8087"
             ]
         }
     },
     "peers": {
-        "org1peer-api.127-0-0-1.nip.io:8081": {
+        "org1peer-api.127-0-0-1.nip.io:8087": {
             "grpcOptions": {
-                "grpc.default_authority": "org1peer-api.127-0-0-1.nip.io:8081",
-                "grpc.ssl_target_name_override": "org1peer-api.127-0-0-1.nip.io:8081"
+                "grpc.default_authority": "org1peer-api.127-0-0-1.nip.io:8087",
+                "grpc.ssl_target_name_override": "org1peer-api.127-0-0-1.nip.io:8087"
             },
-            "url": "grpc://org1peer-api.127-0-0-1.nip.io:8081"
+            "url": "grpc://org1peer-api.127-0-0-1.nip.io:8087"
         }
     },
     "type": "gateway",

@@ -21,6 +21,13 @@ import org.junit.jupiter.api.Test;
 
 
 public final class AssetContractTest {
+    private enum TransStatus {
+        FROM_USER_NOT_FOUND,
+        TO_USER_NOT_FOUND,
+        USER_ALREADY_EXISTS,
+        MONEY_NOT_ENOUGH,
+        SUCCESS,
+    }
 
     @Nested
     class AssetExists {
@@ -34,7 +41,6 @@ public final class AssetContractTest {
 
             when(stub.getState("10001")).thenReturn(new byte[] {});
             boolean result = contract.assetExists(ctx,"10001");
-
             assertFalse(result);
         }
 
@@ -79,7 +85,7 @@ public final class AssetContractTest {
             ChaincodeStub stub = mock(ChaincodeStub.class);
             when(ctx.getStub()).thenReturn(stub);
 
-            String json = "{\"userID\":\"10001\"\"balance\":100.0,\"publicKey\":\"key1\"}";
+            String json = "{\"balance\":100.0,\"publicKey\":\"key1\"}";
 
             contract.createAsset(ctx, "10001", 100, "key1" );
 
@@ -95,11 +101,9 @@ public final class AssetContractTest {
 
             when(stub.getState("10002")).thenReturn(new byte[] { 42 });
 
-            Exception thrown = assertThrows(RuntimeException.class, () -> {
-                contract.createAsset(ctx, "10002", 200, "key2");
-            });
+            String res = contract.createAsset(ctx, "10002", 200, "key2");
 
-            assertEquals(thrown.getMessage(), "The asset 10002 already exists");
+            assertEquals(res, TransStatus.USER_ALREADY_EXISTS.toString());
 
         }
 
@@ -134,7 +138,7 @@ public final class AssetContractTest {
 
             contract.updateBalance(ctx, "10001", 800.0);
 
-            String json = "{\"userID\":\"10001\"\"balance\":800.0,\"publicKey\":\"key1\"}";
+            String json = "{\"balance\":800.0,\"publicKey\":\"key1\"}";
             verify(stub).putState("10001", json.getBytes(UTF_8));
         }
 
@@ -147,11 +151,9 @@ public final class AssetContractTest {
 
             when(stub.getState("10001")).thenReturn(null);
 
-            Exception thrown = assertThrows(RuntimeException.class, () -> {
-                contract.updateBalance(ctx, "10001", 350.0);
-            });
+            String res = contract.updateBalance(ctx, "10001", 350.0);
 
-            assertEquals(thrown.getMessage(), "The asset 10001 does not exist");
+            assertEquals(res, TransStatus.FROM_USER_NOT_FOUND.toString());
         }
 
     }
@@ -164,11 +166,9 @@ public final class AssetContractTest {
         when(ctx.getStub()).thenReturn(stub);
         when(stub.getState("10001")).thenReturn(null);
 
-        Exception thrown = assertThrows(RuntimeException.class, () -> {
-            contract.deleteAsset(ctx, "10001");
-        });
+        String res = contract.deleteAsset(ctx, "10001");
 
-        assertEquals(thrown.getMessage(), "The asset 10001 does not exist");
+        assertEquals(res, TransStatus.FROM_USER_NOT_FOUND.toString());
     }
 
 }
